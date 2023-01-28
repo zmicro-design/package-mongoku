@@ -1,0 +1,45 @@
+#!/bin/bash
+
+export NODE_HOME=/usr/local/node
+export NODE_USER_HOME=$HOME/.node
+export PATH=$NODE_USER_HOME/bin:$NODE_HOME/bin:$PATH
+
+help() {
+  echo "Usage:"
+  echo "  zmicro mongoku <args ...>"
+  echo ""
+
+  mongoku --help
+}
+
+version() {
+  mongoku --version
+}
+
+core() {
+  # context directory
+  local context="$ZMICRO_PACKAGES_DATA_PATH/mongoku"
+  if [ ! -d "$context" ]; then
+    mkdir -p $context
+  fi
+  cd $context
+  # context directory
+
+  case $1 in
+  -h | --help | help)
+    help
+    ;;
+  -v | --version | version)
+    version
+    ;;
+  *)
+    mongoku "$@"
+    ;;
+  esac
+}
+
+run() {
+  core "$@"
+}
+
+run "$@"
