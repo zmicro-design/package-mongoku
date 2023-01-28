@@ -23,7 +23,7 @@ install() {
   cd $tmp_dir
 
   # install
-  pm::npm install -g mongoku@1.3.0
+  pm::npm install -g mongoku@${PACKAGE_CORE_VERSION#v}
 
   # clean
   log::info "[$(timestamp)][package][$name] cleaning ..."
